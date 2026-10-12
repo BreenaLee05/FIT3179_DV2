@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+    <script src="js/vega_lite_vis.js"></script>
+
+    <title>Goodreads Genre Streamgraph</title>
+</head>
+
+<body>
+    <!-- <h1>How Does Genre Representation Change Over Time?</h1> -->
+    <!-- <div id="streamgraph"></div> -->
+    <div id="streamgraph" style="width: 100%; min-height: 450px;"></div>
+
+    <!-- <script>
+        fetch("../../data/google_books_dataset.csv")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Could not load Google Books CSV");
+                }
+                return response.text();
+            })
+            .then(text => {
+                console.log("Google Books data loaded!");
+                console.log("First 500 characters:", text.slice(0, 500));
+                console.log("Total lines:", text.split(/\r?\n/).length);
+            })
+            .catch(error => console.error(error));
+    </script> -->
+</body>
+
+</html>
