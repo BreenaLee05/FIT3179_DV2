@@ -3,8 +3,8 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
   "title": {
-    "text": "How Does Book Category Representation Change Over Time?",
-    "subtitle": "Number of records in the Google Books dataset, grouped by publication decade"
+    "text": "How Does Book Category Change Over Time?",
+    "subtitle": "Explore how the landscape of book categories has shifted through the decades."
   },
 
   "width": 800,
@@ -123,6 +123,7 @@
   },
 
   "config": {
+    "background": "#F3FAF9",
     "view": {"stroke": null},
     "axis": {
       "labelFontSize": 12,
