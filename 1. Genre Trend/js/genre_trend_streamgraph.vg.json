@@ -1,0 +1,136 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "How Does Book Category Representation Change Over Time?",
+    "subtitle": "Number of records in the Google Books dataset, grouped by publication decade"
+  },
+
+  "width": 800,
+  "height": 400,
+
+  "data": {
+    "url": "../../data/google_books_dataset.csv",
+    "format": {"type": "csv"}
+  },
+
+  "transform": [
+    {
+      "calculate": "isValid(datum.published_date) && datum.published_date != '' ? toNumber(slice(toString(datum.published_date), 0, 4)) : null",
+      "as": "year_num"
+    },
+    {
+      "filter": "isValid(datum.year_num) && datum.year_num >= 1900 && datum.year_num <= 2026"
+    },
+    {
+      "calculate": "floor(datum.year_num / 10) * 10",
+      "as": "decade"
+    },
+    {
+      "filter": "isValid(datum.categories) && datum.categories != ''"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "count",
+          "as": "category_total"
+        }
+      ],
+      "groupby": ["categories"]
+    },
+    {
+      "window": [
+        {
+          "op": "dense_rank",
+          "as": "category_rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "category_total",
+          "order": "descending"
+        }
+      ]
+    },
+    {
+      "filter": "datum.category_rank <= 5"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "book_count"
+        }
+      ],
+      "groupby": ["decade", "categories"]
+    },
+    {
+      "calculate": "toString(datum.decade) + 's'",
+      "as": "decade_label"
+    }
+  ],
+
+  "mark": {
+    "type": "area",
+    "interpolate": "basis",
+    "opacity": 0.85
+  },
+
+  "encoding": {
+    "x": {
+      "field": "decade",
+      "type": "quantitative",
+      "title": "Publication Decade",
+      "axis": {
+        "format": "d",
+        "tickMinStep": 10
+      }
+    },
+
+    "y": {
+      "field": "book_count",
+      "type": "quantitative",
+      "stack": "center",
+      "title": "Number of Book Records",
+      "axis": null
+    },
+
+    "color": {
+      "field": "categories",
+      "type": "nominal",
+      "title": "Category"
+    },
+
+    "tooltip": [
+      {
+        "field": "decade_label",
+        "type": "nominal",
+        "title": "Decade"
+      },
+      {
+        "field": "categories",
+        "type": "nominal",
+        "title": "Category"
+      },
+      {
+        "field": "book_count",
+        "type": "quantitative",
+        "title": "Number of Records",
+        "format": ","
+      }
+    ]
+  },
+
+  "config": {
+    "view": {"stroke": null},
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13
+    },
+    "title": {
+      "fontSize": 18,
+      "anchor": "start"
+    }
+  }
+}
