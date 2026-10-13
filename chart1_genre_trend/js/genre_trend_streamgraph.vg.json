@@ -54,7 +54,7 @@
       ]
     },
     {
-      "filter": "datum.category_rank <= 5"
+      "filter": "datum.category_rank <= 10"
     },
     {
       "aggregate": [
