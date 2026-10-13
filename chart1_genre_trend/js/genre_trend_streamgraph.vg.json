@@ -7,7 +7,7 @@
     "subtitle": "Explore how the landscape of book categories has shifted through the decades."
   },
 
-  "width": 800,
+  "width": 600,
   "height": 400,
 
   "data": {
@@ -123,7 +123,6 @@
   },
 
   "config": {
-    "background": "#F3FAF9",
     "view": {"stroke": null},
     "axis": {
       "labelFontSize": 12,

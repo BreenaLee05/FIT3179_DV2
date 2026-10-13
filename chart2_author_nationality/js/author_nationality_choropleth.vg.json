@@ -4,7 +4,7 @@
     "text": "Where Do the Bestselling Authors Come From?",
     "subtitle": "Explore the number of bestseller entries by author nationality"
   },
-  "width": 800,
+  "width": 600,
   "height": 400,
   "projection": {
     "type": "equalEarth"
@@ -81,5 +81,18 @@
         "title": "Best rank"
       }
     ]
+  },
+  
+  "config": {
+    "view": {"stroke": null},
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13
+    },
+    "title": {
+      "fontSize": 18,
+      "anchor": "start"
+    }
   }
+
 }
