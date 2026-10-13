@@ -9,3 +9,8 @@ var spec2 = "../chart2_author_nationality/js/author_nationality_choropleth.vg.js
 vegaEmbed('#choropleth_map', spec2).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
+
+var spec3 = "../chart3_genre_distribution/js/genre_distribution_treemap.vg.json";
+vegaEmbed('#treemap', spec3).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+}).catch(console.error);

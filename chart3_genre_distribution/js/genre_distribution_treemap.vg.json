@@ -1,0 +1,103 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 700,
+  "height": 500,
+  "padding": 5,
+  "data": [
+    {
+      "name": "raw",
+      "url": "../../data/genre_treemap_summary.csv",
+      "format": {
+        "type": "csv",
+        "parse": {"total_reviews": "number", "book_count": "number"}
+      }
+    },
+    {
+      "name": "tree_data",
+      "source": "raw",
+      "transform": [
+        {"type": "formula", "expr": "'All Books'", "as": "parent"}
+      ]
+    },
+    {
+      "name": "root_node",
+      "values": [{"categories": "All Books"}]
+    },
+    {
+      "name": "combined",
+      "source": ["root_node", "tree_data"]
+    },
+    {
+      "name": "tree",
+      "source": "combined",
+      "transform": [
+        {"type": "stratify", "key": "categories", "parentKey": "parent"},
+        {
+          "type": "treemap",
+          "field": "total_reviews",
+          "sort": {"field": "value", "order": "descending"},
+          "method": "squarify",
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        }
+      ]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {"type": "filter", "expr": "datum.children == 0"}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "raw", "field": "categories"},
+      "range": {"scheme": "category20"}
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "leaves"},
+      "encode": {
+        "enter": {
+          "stroke": {"value": "#ffffff"},
+          "strokeWidth": {"value": 2}
+        },
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "fill": {"scale": "color", "field": "categories"},
+          "tooltip": {
+            "signal": "{'Genre': datum.categories, 'Total Reviews': format(datum.total_reviews, ','), 'Books': datum.book_count}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "leaves"},
+      "encode": {
+        "enter": {
+          "font": {"value": "sans-serif"},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "#ffffff"},
+          "baseline": {"value": "top"},
+          "align": {"value": "left"}
+        },
+        "update": {
+          "x": {"signal": "datum.x0 + 6"},
+          "y": {"signal": "datum.y0 + 6"},
+          "text": {
+            "signal": "(datum.x1 - datum.x0 > 70 && datum.y1 - datum.y0 > 30) ? datum.categories : ''"
+          }
+        }
+      }
+    }
+  ]
+}
