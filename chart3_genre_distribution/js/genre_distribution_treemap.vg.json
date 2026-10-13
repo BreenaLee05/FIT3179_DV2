@@ -6,7 +6,7 @@
   "data": [
     {
       "name": "raw",
-      "url": "../../data/genre_treemap_summary.csv",
+      "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/genre_treemap_summary.csv",
       "format": {
         "type": "csv",
         "parse": {"total_reviews": "number", "book_count": "number"}
