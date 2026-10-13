@@ -11,7 +11,7 @@
   "height": 400,
 
   "data": {
-    "url": "../../data/google_books_dataset.csv",
+    "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/google_books_dataset.csv",
     "format": {"type": "csv"}
   },
 
