@@ -1,0 +1,136 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.4.0.json",
+  "title": {
+    "text": "Where Do the Bestselling Authors Come From?",
+    "subtitle": "Circle size represents bestseller entries by author nationality"
+  },
+  "width": 600,
+  "height": 400,
+  "projection": {
+    "type": "equalEarth"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#E8EEF2",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/author_nationality_summary.csv"
+      },
+      "transform": [
+        {
+          "lookup": "nationality",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/katerinaSo/countries_cities_data/main/country-capitals.csv"
+            },
+            "key": "CountryName",
+            "fields": [
+              "CapitalLatitude",
+              "CapitalLongitude",
+              "CapitalName"
+            ]
+          }
+        },
+        {
+          "filter": "isValid(datum.CapitalLatitude) && isValid(datum.CapitalLongitude) && isValid(datum.entryCount) && datum.entryCount > 0"
+        },
+        {
+          "calculate": "toNumber(datum.CapitalLongitude)",
+          "as": "longitude"
+        },
+        {
+          "calculate": "toNumber(datum.CapitalLatitude)",
+          "as": "latitude"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "color": "#287D8E",
+        "opacity": 0.75,
+        "stroke": "white",
+        "strokeWidth": 0.7
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "entryCount",
+          "type": "quantitative",
+          "title": "Bestseller entries",
+          "scale": {
+            "type": "sqrt",
+            "domain": [1, 1886],
+            "range": [10, 1200]
+          },
+          "legend": {
+            "format": "d",
+            "values": [1, 100, 500, 1000, 1886]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "nationality",
+            "type": "nominal",
+            "title": "Author nationality"
+          },
+          {
+            "field": "entryCount",
+            "type": "quantitative",
+            "title": "Bestseller entries",
+            "format": ","
+          },
+          {
+            "field": "sharePercent",
+            "type": "quantitative",
+            "title": "Share of entries (%)",
+            "format": ".2f"
+          },
+          {
+            "field": "topRankedBook",
+            "type": "nominal",
+            "title": "Highest-ranked book"
+          },
+          {
+            "field": "bestRank",
+            "type": "quantitative",
+            "title": "Best rank"
+          },
+          {
+            "field": "CapitalName",
+            "type": "nominal",
+            "title": "Reference city"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "fontSize": 18,
+      "anchor": "start"
+    }
+  }
+}
