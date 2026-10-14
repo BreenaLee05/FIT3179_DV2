@@ -1,27 +1,23 @@
 
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-
   "title": {
     "text": "How Does Book Category Change Over Time?",
-    "subtitle": "Explore how the landscape of book categories has shifted through the decades."
+    "subtitle": "Select a period in the overview to explore category trends in detail."
   },
-
-  "width": 600,
-  "height": 400,
-
   "data": {
     "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/google_books_dataset.csv",
-    "format": {"type": "csv"}
+    "format": {
+      "type": "csv"
+    }
   },
-
   "transform": [
     {
       "calculate": "isValid(datum.published_date) && datum.published_date != '' ? toNumber(slice(toString(datum.published_date), 0, 4)) : null",
       "as": "year_num"
     },
     {
-      "filter": "isValid(datum.year_num) && datum.year_num >= 1900 && datum.year_num <= 2026"
+      "filter": "isValid(datum.year_num) && datum.year_num >= 1800 && datum.year_num <= 2026"
     },
     {
       "calculate": "floor(datum.year_num / 10) * 10",
@@ -70,63 +66,135 @@
       "as": "decade_label"
     }
   ],
-
-  "mark": {
-    "type": "area",
-    "interpolate": "basis",
-    "opacity": 0.85
-  },
-
-  "encoding": {
-    "x": {
-      "field": "decade",
-      "type": "quantitative",
-      "title": "Publication Decade",
-      "axis": {
-        "format": "d",
-        "tickMinStep": 10
+  "vconcat": [
+    {
+      "width": 600,
+      "height": 300,
+      "transform": [
+        {
+          "filter": {
+            "param": "brush"
+          }
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.85
+      },
+      "encoding": {
+        "x": {
+          "field": "decade",
+          "type": "quantitative",
+          "title": "Publication decade",
+          "axis": {
+            "format": "d",
+            "tickMinStep": 10
+          }
+        },
+        "y": {
+          "field": "book_count",
+          "type": "quantitative",
+          "stack": "center",
+          "title": "Number of book records",
+          "axis": null
+        },
+        "color": {
+          "field": "categories",
+          "type": "nominal",
+          "title": "Category"
+        },
+        "tooltip": [
+          {
+            "field": "decade_label",
+            "type": "nominal",
+            "title": "Decade"
+          },
+          {
+            "field": "categories",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "book_count",
+            "type": "quantitative",
+            "title": "Book records",
+            "format": ","
+          }
+        ]
       }
     },
-
-    "y": {
-      "field": "book_count",
-      "type": "quantitative",
-      "stack": "center",
-      "title": "Number of Book Records",
-      "axis": null
-    },
-
-    "color": {
-      "field": "categories",
-      "type": "nominal",
-      "title": "Category"
-    },
-
-    "tooltip": [
-      {
-        "field": "decade_label",
-        "type": "nominal",
-        "title": "Decade"
+    {
+      "width": 600,
+      "height": 100,
+      "params": [
+        {
+          "name": "brush",
+          "select": {
+            "type": "interval",
+            "encodings": ["x"]
+          }
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "interpolate": "basis",
+        "opacity": 0.8
       },
-      {
-        "field": "categories",
-        "type": "nominal",
-        "title": "Category"
-      },
-      {
-        "field": "book_count",
-        "type": "quantitative",
-        "title": "Number of Records",
-        "format": ","
+      "encoding": {
+        "x": {
+          "field": "decade",
+          "type": "quantitative",
+          "title": "Publication decade",
+          "axis": {
+            "format": "d",
+            "tickMinStep": 10
+          }
+        },
+        "y": {
+          "field": "book_count",
+          "type": "quantitative",
+          "stack": "center",
+          "axis": null
+        },
+        "color": {
+          "field": "categories",
+          "type": "nominal",
+          "title": "Category"
+        },
+        "tooltip": [
+          {
+            "field": "decade_label",
+            "type": "nominal",
+            "title": "Decade"
+          },
+          {
+            "field": "categories",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "book_count",
+            "type": "quantitative",
+            "title": "Book records",
+            "format": ","
+          }
+        ]
       }
-    ]
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "shared"
+    }
   },
-
   "config": {
-    "view": {"stroke": null},
+    "view": {
+      "stroke": null
+    },
     "axis": {
-      "labelFontSize": 12,
-      "titleFontSize": 13
+      "labelFontSize": 11,
+      "titleFontSize": 12
     },
     "title": {
       "fontSize": 18,
