@@ -6,7 +6,7 @@
     "subtitle": "Flows from authors' nationalities to publishers' countries; thicker lines represent more books"
   },
   "width": 850,
-  "height": 480,
+  "height": 500,
   "projection": {
     "type": "equalEarth"
   },

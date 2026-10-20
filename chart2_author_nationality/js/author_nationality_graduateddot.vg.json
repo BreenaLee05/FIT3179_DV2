@@ -5,7 +5,7 @@
     "text": "Where Do the Bestselling Authors Come From?",
     "subtitle": "Circle size represents bestseller entries by author nationality"
   },
-  "width": 600,
+  "width": 850,
   "height": 400,
   "projection": {
     "type": "equalEarth"
@@ -21,7 +21,7 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#E8EEF2",
+        "fill": "#C5D5DF",
         "stroke": "white",
         "strokeWidth": 0.5
       }
