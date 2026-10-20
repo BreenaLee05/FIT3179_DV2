@@ -349,3 +349,82 @@ p {
         font-size: 1.15rem;
     }
 }
+
+
+
+/* Each visualisation section occupies approximately one screen */
+.dashboard-section {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 50px 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Section heading */
+.section-heading {
+    width: 100%;
+    text-align: center;
+}
+
+.section-heading h2 {
+    margin-bottom: 10px;
+}
+
+.section-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* Full-width chart container */
+.chart-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Let the chart use the available width */
+.chart-card .vis-container {
+    width: 100%;
+    min-height: 300px;
+}
+
+/* Two equal-width text boxes */
+.section-text-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.section-text-grid .text-card {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 24px;
+    border-radius: 12px;
+    line-height: 1.7;
+}
+
+/* Stack text boxes on smaller screens */
+@media (max-width: 768px) {
+    .dashboard-section {
+        min-height: auto;
+        padding: 40px 5%;
+    }
+
+    .section-text-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+        padding: 10px;
+    }
+}
+
