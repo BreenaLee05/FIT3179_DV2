@@ -1,0 +1,102 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Where Are Authors' Books Published?",
+    "subtitle": "Flows from authors' nationalities to publishers' countries; thicker lines represent more books"
+  },
+  "width": 850,
+  "height": 480,
+  "projection": {
+    "type": "equalEarth"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#C5D5DF",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "../../data/nationality_publication_flows.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.origin != datum.destination && datum.books > 0"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#D97757",
+        "opacity": 0.55
+      },
+      "encoding": {
+        "longitude": {
+          "field": "origin_lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "origin_lat",
+          "type": "quantitative"
+        },
+        "longitude2": {
+          "field": "destination_lon"
+        },
+        "latitude2": {
+          "field": "destination_lat"
+        },
+        "strokeWidth": {
+          "field": "books",
+          "type": "quantitative",
+          "scale": {
+            "range": [0.5, 5]
+          },
+          "legend": {
+            "title": "Number of books"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "origin",
+            "type": "nominal",
+            "title": "Author nationality"
+          },
+          {
+            "field": "destination",
+            "type": "nominal",
+            "title": "Publisher country"
+          },
+          {
+            "field": "books",
+            "type": "quantitative",
+            "title": "Number of books"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "title": {
+      "anchor": "start",
+      "fontSize": 20,
+      "subtitleFontSize": 12,
+      "subtitleColor": "#666666"
+    }
+  }
+}

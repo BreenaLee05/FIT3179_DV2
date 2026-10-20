@@ -147,3 +147,205 @@ p {
   border-top: 1px solid var(--border-color);
   margin-top: 40px;
 }
+
+
+/* Introduction */
+.introduction {
+    margin-top: 30px;
+    margin-bottom: 45px;
+}
+
+/* Each main dashboard section */
+.dashboard-section {
+    margin-top: 40px;
+    margin-bottom: 55px;
+}
+
+/* Section headings */
+.dashboard-section > .pure-g:first-child {
+    margin-bottom: 18px;
+}
+
+.dashboard-section h2 {
+    margin-bottom: 10px;
+}
+
+.section-intro {
+    margin-top: 0;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* Subsection headings in explanatory cards */
+.text-card h3 {
+    margin-top: 18px;
+}
+
+.text-card h3:first-child {
+    margin-top: 0;
+}
+
+/* Footer */
+.dashboard-footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #d8e0e5;
+}
+
+
+
+/* ===== Introduction Card ===== */
+
+.introduction-section {
+    padding: 35px 0 65px;
+}
+
+.introduction-card {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 45px 50px;
+    overflow: hidden;
+
+    background: #fffefa;
+    border: 1px solid #e4e2d8;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(35, 59, 64, 0.06);
+}
+
+/* Decorative accent at the top */
+.introduction-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #557e77;
+}
+
+.introduction-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.intro-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #e5eee8;
+    font-size: 1.3rem;
+}
+
+.intro-label {
+    color: #557e77;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+}
+
+.introduction-title {
+    margin: 0 0 15px;
+    color: #233b40;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+}
+
+.introduction-lead {
+    max-width: 760px;
+    margin-bottom: 22px;
+    color: #557e77;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    line-height: 1.6;
+}
+
+.introduction-divider {
+    width: 55px;
+    height: 2px;
+    margin: 24px 0;
+    background: #bd7758;
+}
+
+.introduction-card > p:not(.introduction-lead) {
+    max-width: 900px;
+    color: #697976;
+    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+/* Three topic summaries */
+.introduction-topics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 32px;
+    padding-top: 25px;
+    border-top: 1px solid #e4e2d8;
+}
+
+.intro-topic {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    background: #f5f5ef;
+    border-radius: 10px;
+}
+
+.topic-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #e1ebe5;
+    color: #557e77;
+    font-size: 1.15rem;
+}
+
+.intro-topic strong,
+.intro-topic span:not(.topic-icon) {
+    display: block;
+}
+
+.intro-topic strong {
+    margin-bottom: 5px;
+    color: #233b40;
+    font-size: 0.84rem;
+}
+
+.intro-topic div > span {
+    color: #697976;
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+/* Responsive layout */
+@media screen and (max-width: 767px) {
+    .introduction-section {
+        padding: 20px 0 45px;
+    }
+
+    .introduction-card {
+        padding: 30px 22px;
+        border-radius: 12px;
+    }
+
+    .introduction-topics {
+        grid-template-columns: 1fr;
+    }
+
+    .introduction-lead {
+        font-size: 1.15rem;
+    }
+}

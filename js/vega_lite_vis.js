@@ -82,3 +82,31 @@ fetch(spec3)
     .catch(function(error) {
         console.error("Chart loading failed:", error);
     });
+
+
+var spec4 = "../chart4_origin_destination_flow/js/origin_destination_flow.vg.json";
+// vegaEmbed('#treemap', spec3).then(function(result) {
+//     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+// }).catch(console.error);
+
+fetch(spec4)
+    .then(function(response) {
+        console.log("JSON response status:", response.status);
+
+        if (!response.ok) {
+            throw new Error("Could not load JSON: " + response.status);
+        }
+
+        return response.json();
+    })
+    .then(function(spec) {
+        console.log("JSON loaded successfully:", spec);
+
+        return vegaEmbed("#flowmap", spec);
+    })
+    .then(function(result) {
+        console.log("Chart rendered successfully");
+    })
+    .catch(function(error) {
+        console.error("Chart loading failed:", error);
+    });
