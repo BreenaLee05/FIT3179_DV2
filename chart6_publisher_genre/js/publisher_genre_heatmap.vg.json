@@ -1,0 +1,129 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": {"step": 32},
+  "background": "#fffefa",
+  "title": {
+    "text": "The Publishing Landscape: Which Publishers Dominate Each Genre?",
+    "subtitle": "Explore the number of books published by each publisher across genres."
+  },
+  "data": {
+    "url": "../../data/goodreads_best_book.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "filter": "isValid(datum.publisher) && datum.publisher != '' && isValid(datum.genre) && datum.genre != ''"
+    },
+    {
+      "aggregate": [
+        {"op": "count", "as": "bookCount"}
+      ],
+      "groupby": ["publisher", "genre"]
+    },
+    {
+      "joinaggregate": [
+        {"op": "sum", "field": "bookCount", "as": "publisherTotal"}
+      ],
+      "groupby": ["publisher"]
+    },
+    {
+      "window": [
+        {"op": "dense_rank", "as": "publisherRank"}
+      ],
+      "sort": [
+        {"field": "publisherTotal", "order": "descending"},
+        {"field": "publisher", "order": "ascending"}
+      ]
+    },
+    {
+      "filter": "datum.publisherRank <= 10"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "cornerRadius": 3,
+    "stroke": "#fffefa",
+    "strokeWidth": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "genre",
+      "type": "nominal",
+      "title": "Genre",
+      "sort": "ascending",
+      "axis": {
+        "labelAngle": -40,
+        "labelLimit": 120,
+        "labelFontSize": 11,
+        "titleColor": "#233b40",
+        "labelColor": "#233b40"
+      }
+    },
+    "y": {
+      "field": "publisher",
+      "type": "nominal",
+      "title": "Publisher",
+      "sort": {
+        "field": "publisherTotal",
+        "op": "max",
+        "order": "descending"
+      },
+      "axis": {
+        "labelLimit": 180,
+        "labelFontSize": 11,
+        "titleColor": "#233b40",
+        "labelColor": "#233b40"
+      }
+    },
+    "color": {
+      "field": "bookCount",
+      "type": "quantitative",
+      "title": "Number of books",
+      "scale": {
+        "type": "sqrt",
+        "scheme": "tealblues",
+        "zero": true
+      },
+      "legend": {
+        "orient": "bottom",
+        "titleColor": "#233b40",
+        "format": "d",
+        "tickCount": 6
+      }
+    },
+    "tooltip": [
+      {
+        "field": "publisher",
+        "type": "nominal",
+        "title": "Publisher"
+      },
+      {
+        "field": "genre",
+        "type": "nominal",
+        "title": "Genre"
+      },
+      {
+        "field": "bookCount",
+        "type": "quantitative",
+        "title": "Number of books"
+      },
+      {
+        "field": "publisherTotal",
+        "type": "quantitative",
+        "title": "Total books by publisher"
+      }
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "font": "Arial",
+    "axis": {"grid": false, "domain": false, "tickSize": 0},
+    "title": {
+      "color": "#233b40",
+      "fontSize": 19,
+      "anchor": "start"
+    }
+  }
+}
