@@ -1,0 +1,167 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 1000,
+    "height": 500,
+    "background": "#fffefa",
+    "title": {
+        "text": "How Are Books Rated?",
+        "subtitle": "Each square represents one book. Select a publication year."
+    },
+    "data": {
+        "url": "../../data/goodreads_best_book.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "params": [
+        {
+            "name": "selectedYear",
+            "value": 2020,
+            "bind": {
+                "input": "select",
+                "options": [
+                    2020,
+                    2021,
+                    2022,
+                    2023,
+                    2024,
+                    2025
+                ],
+                "name": "Publication year: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "calculate": "toNumber(datum.year)",
+            "as": "publicationYear"
+        },
+        {
+            "calculate": "toNumber(datum.avg_rating)",
+            "as": "rating"
+        },
+        {
+            "filter": "datum.publicationYear == selectedYear && isValid(datum.rating) && datum.rating >= 0 && datum.rating <= 5"
+        },
+        {
+            "calculate": "datum.rating >= 4 ? 'Highly rated (4–5)' : datum.rating >= 3 ? 'Mid-rated (3–<4)' : 'Lower-rated (<3)'",
+            "as": "ratingGroup"
+        },
+        {
+            "calculate": "datum.rating >= 4 ? 0 : datum.rating >= 3 ? 1 : 2",
+            "as": "ratingOrder"
+        },
+        {
+            "window": [
+                {
+                    "op": "row_number",
+                    "as": "bookNumber"
+                }
+            ],
+            "sort": [
+                {
+                    "field": "ratingOrder",
+                    "order": "ascending"
+                },
+                {
+                    "field": "rating",
+                    "order": "descending"
+                }
+            ]
+        },
+        {
+            "calculate": "(datum.bookNumber - 1) % 25",
+            "as": "column"
+        },
+        {
+            "calculate": "floor((datum.bookNumber - 1) / 25)",
+            "as": "row"
+        }
+    ],
+    "mark": {
+        "type": "rect",
+        "cornerRadius": 2,
+        "stroke": "#fffefa",
+        "strokeWidth": 1
+    },
+    "encoding": {
+        "x": {
+            "field": "column",
+            "type": "ordinal",
+            "axis": null,
+            "scale": {
+                "paddingInner": 0.12
+            }
+        },
+        "y": {
+            "field": "row",
+            "type": "ordinal",
+            "axis": null,
+            "scale": {
+                "paddingInner": 0.12,
+                "reverse": true
+            }
+        },
+        "color": {
+            "field": "ratingGroup",
+            "type": "nominal",
+            "scale": {
+                "domain": [
+                    "Highly rated (4–5)",
+                    "Mid-rated (3–<4)",
+                    "Lower-rated (<3)"
+                ],
+                "range": [
+                    "#557e77",
+                    "#d8b77a",
+                    "#bd7758"
+                ]
+            },
+            "legend": {
+                "title": "Average rating",
+                "orient": "bottom"
+            }
+        },
+        "tooltip": [
+            {
+                "field": "title",
+                "type": "nominal",
+                "title": "Book"
+            },
+            {
+                "field": "author",
+                "type": "nominal",
+                "title": "Author"
+            },
+            {
+                "field": "rating",
+                "type": "quantitative",
+                "title": "Average rating",
+                "format": ".2f"
+            },
+            {
+                "field": "publicationYear",
+                "title": "Publication year"
+            },
+            {
+                "field": "genre",
+                "title": "Genre"
+            }
+        ]
+    },
+    "config": {
+        "view": {
+            "stroke": null
+        },
+        "axis": {
+            "grid": false
+        },
+        "font": "Arial",
+        "title": {
+            "anchor": "start",
+            "fontSize": 20,
+            "subtitleFontSize": 12,
+            "subtitleColor": "#666666"
+        }
+    }
+}

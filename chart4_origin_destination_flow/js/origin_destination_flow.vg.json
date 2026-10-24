@@ -3,13 +3,76 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Where Are Authors' Books Published?",
-    "subtitle": "Flows from authors' nationalities to publishers' countries; thicker lines represent more books"
+    "subtitle": "Filter international publishing flows by origin and book count"
   },
   "width": 850,
   "height": 500,
-  "projection": {
-    "type": "equalEarth"
-  },
+  "projection": {"type": "equalEarth"},
+
+  "params": [
+    {
+      "name": "originRegion",
+      "value": "All origins",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All origins",
+          "Europe",
+          "Outside Europe"
+        ],
+        "name": "Origin region: "
+      }
+    },
+    {
+      "name": "selectedOrigin",
+      "value": "All countries",
+      "bind": {
+        "input": "select",
+        "options": [
+          "All countries",
+          "Argentina",
+          "Australia",
+          "Austria",
+          "Belgium",
+          "Brazil",
+          "Canada",
+          "Chile",
+          "China",
+          "Denmark",
+          "France",
+          "Germany",
+          "India",
+          "Ireland",
+          "Italy",
+          "Japan",
+          "Mexico",
+          "Netherlands",
+          "New Zealand",
+          "Norway",
+          "Portugal",
+          "South Africa",
+          "Spain",
+          "Sweden",
+          "Switzerland",
+          "United Kingdom",
+          "United States"
+        ],
+        "name": "Author nationality: "
+      }
+    },
+    {
+      "name": "minBooks",
+      "value": 1,
+      "bind": {
+        "input": "range",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "name": "Minimum books per flow: "
+      }
+    }
+  ],
+
   "layer": [
     {
       "data": {
@@ -21,7 +84,7 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#C5D5DF",
+        "fill": "#DCE5EA",
         "stroke": "#FFFFFF",
         "strokeWidth": 0.5
       }
@@ -29,19 +92,23 @@
     {
       "data": {
         "url": "../../data/nationality_publication_flows.csv",
-        "format": {
-          "type": "csv"
-        }
+        "format": {"type": "csv"}
       },
       "transform": [
         {
-          "filter": "datum.origin != datum.destination && datum.books > 0"
+          "filter": "datum.origin != datum.destination && datum.books >= minBooks"
+        },
+        {
+          "filter": "selectedOrigin == 'All countries' || datum.origin == selectedOrigin"
+        },
+        {
+          "filter": "originRegion == 'All origins' || (originRegion == 'Europe' && indexof(['Algeria','Angola','Argentina','Australia','Austria','Belgium','Brazil','Bulgaria','Cameroon','Canada','Chile','China','Colombia','Cuba','Cyprus','Czech Republic','Denmark','Dominican Republic','Egypt','Finland','France','Georgia','Germany','Greece','Haiti','Hungary','India','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Lebanon','Malaysia','Mexico','Morocco','Mozambique','Netherlands','New Zealand','Nigeria','Norway','Pakistan','Peru','Poland','Portugal','Senegal','Singapore','South Africa','South Korea','Spain','Sweden','Switzerland','Tanzania','Turkey','United Kingdom','United States','Venezuela','Vietnam'], datum.origin) >= 0) || (originRegion == 'Outside Europe' && indexof(['Algeria','Angola','Argentina','Australia','Austria','Belgium','Brazil','Bulgaria','Cameroon','Canada','Chile','China','Colombia','Cuba','Cyprus','Czech Republic','Denmark','Dominican Republic','Egypt','Finland','France','Georgia','Germany','Greece','Haiti','Hungary','India','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Lebanon','Malaysia','Mexico','Morocco','Mozambique','Netherlands','New Zealand','Nigeria','Norway','Pakistan','Peru','Poland','Portugal','Senegal','Singapore','South Africa','South Korea','Spain','Sweden','Switzerland','Tanzania','Turkey','United Kingdom','United States','Venezuela','Vietnam'], datum.origin) < 0)"
         }
       ],
       "mark": {
         "type": "rule",
         "color": "#D97757",
-        "opacity": 0.55
+        "opacity": 0.65
       },
       "encoding": {
         "longitude": {
@@ -52,21 +119,17 @@
           "field": "origin_lat",
           "type": "quantitative"
         },
-        "longitude2": {
-          "field": "destination_lon"
-        },
-        "latitude2": {
-          "field": "destination_lat"
-        },
+        "longitude2": {"field": "destination_lon"},
+        "latitude2": {"field": "destination_lat"},
         "strokeWidth": {
           "field": "books",
           "type": "quantitative",
           "scale": {
-            "range": [0.5, 5]
+            "type": "sqrt",
+            "domain": [1, 113],
+            "range": [0.5, 4]
           },
-          "legend": {
-            "title": "Number of books"
-          }
+          "legend": {"title": "Number of books"}
         },
         "tooltip": [
           {
@@ -86,12 +149,154 @@
           }
         ]
       }
+    },
+    {
+      "data": {
+        "url": "../../data/nationality_publication_flows.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {
+          "filter": "datum.origin != datum.destination && datum.books >= minBooks"
+        },
+        {
+          "filter": "selectedOrigin == 'All countries' || datum.origin == selectedOrigin"
+        },
+        {
+          "filter": "originRegion == 'All origins' || (originRegion == 'Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) >= 0) || (originRegion == 'Outside Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) < 0)"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#D97757",
+        "opacity": 0.65
+      },
+      "encoding": {
+        "longitude": {"field": "origin_lon", "type": "quantitative"},
+        "latitude": {"field": "origin_lat", "type": "quantitative"},
+        "longitude2": {"field": "destination_lon"},
+        "latitude2": {"field": "destination_lat"},
+        "strokeWidth": {
+          "field": "books",
+          "type": "quantitative",
+          "scale": {"type": "sqrt", "domain": [1, 113], "range": [0.5, 4]},
+          "legend": {"title": "Number of books"}
+        },
+        "tooltip": [
+          {"field": "origin", "title": "Origin: Author nationality"},
+          {"field": "destination", "title": "Destination: Publisher country"},
+          {"field": "books", "title": "Number of books"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "../../data/nationality_publication_flows.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {
+          "filter": "datum.origin != datum.destination && datum.books >= minBooks"
+        },
+        {
+          "filter": "selectedOrigin == 'All countries' || datum.origin == selectedOrigin"
+        },
+        {
+          "filter": "originRegion == 'All origins' || (originRegion == 'Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) >= 0) || (originRegion == 'Outside Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) < 0)"
+        },
+        {
+          "calculate": "'Publisher country (destination)'", "as": "pointType"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "shape": "circle",
+        "filled": true,
+        "color": "#0F766E",
+        "size": 90,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {"field": "origin_lon", "type": "quantitative"},
+        "latitude": {"field": "origin_lat", "type": "quantitative"},
+        "tooltip": [
+          {"field": "origin", "title": "ORIGIN"},
+          {"field": "destination", "title": "Destination"},
+          {"field": "books", "title": "Number of books"}
+        ],
+        "color": {
+          "field": "pointType",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Author nationality (origin)",
+              "Publisher country (destination)"
+            ],
+            "range": ["#0F766E", "#F59E0B"]
+          },
+          "legend": {
+            "title": "Point represents"
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "url": "../../data/nationality_publication_flows.csv",
+        "format": {"type": "csv"}
+      },
+      "transform": [
+        {
+          "filter": "datum.origin != datum.destination && datum.books >= minBooks"
+        },
+        {
+          "filter": "selectedOrigin == 'All countries' || datum.origin == selectedOrigin"
+        },
+        {
+          "filter": "originRegion == 'All origins' || (originRegion == 'Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) >= 0) || (originRegion == 'Outside Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) < 0)"
+        },
+        {
+          "calculate": "'Author nationality (origin)'", "as": "pointType"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "shape": "circle",
+        "filled": true,
+        "color": "#F59E0B",
+        "size": 130,
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "longitude": {"field": "destination_lon", "type": "quantitative"},
+        "latitude": {"field": "destination_lat", "type": "quantitative"},
+        "tooltip": [
+          {"field": "origin", "title": "Origin"},
+          {"field": "destination", "title": "DESTINATION"},
+          {"field": "books", "title": "Number of books"}
+        ],
+        "color": {
+          "field": "pointType",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Author nationality (origin)",
+              "Publisher country (destination)"
+            ],
+            "range": ["#0F766E", "#F59E0B"]
+          },
+          "legend": {
+            "title": "Point represents"
+          }
+        }
+      }
     }
   ],
+
   "config": {
-    "view": {
-      "stroke": null
-    },
+    "view": {"stroke": null},
     "title": {
       "anchor": "start",
       "fontSize": 20,
