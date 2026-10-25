@@ -1,0 +1,166 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 835,
+  "height": 500,
+  "autosize": {
+    "type": "pad",
+    "contains": "padding"
+  },
+  "padding": {
+    "left": 5,
+    "right": 20,
+    "top": 5,
+    "bottom": 5
+  },
+  "title": {
+    "text": "Who Spends the Most Time Reading?",
+    "subtitle": "Average reading hours per day by generation and group",
+    "anchor": "start",
+    "color": "#233b40",
+    "font": "Arial",
+    "fontSize": 21,
+    "subtitleColor": "#557e77",
+    "subtitleFontSize": 12,
+    "offset": 18
+  },
+  "data": {
+    "url": "../../data/average_time_spent_on_reading_by_sex.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "Males (Hours)",
+        "Females (Hours)",
+        "Persons (Hours)"
+      ],
+      "as": ["groupField", "hours"]
+    },
+    {
+      "calculate": "replace(datum.groupField, ' (Hours)', '')",
+      "as": "group"
+    },
+    {
+      "calculate": "indexof(['Generation Z', 'Millenials', 'Generation X', 'Baby Boomers', 'Interwar'], datum.generation)",
+      "as": "generationIndex"
+    },
+    {
+      "calculate": "datum.generationIndex * 4 + indexof(['Males', 'Females', 'Persons'], datum.group)",
+      "as": "rowPosition"
+    },
+    {
+      "calculate": "datum.group == 'Males' ? 'Confidence Interval (Hours) (low)' : datum.group == 'Females' ? 'Confidence Interval (Hours) (low)' : 'Confidence Interval (Hours) (low)'",
+      "as": "unused"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "height": 13,
+        "cornerRadiusEnd": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "rowPosition",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              0, 1, 2,
+              4, 5, 6,
+              8, 9, 10,
+              12, 13, 14,
+              16, 17, 18
+            ],
+            "paddingInner": 0.15,
+            "paddingOuter": 0.1
+          },
+          "axis": {
+            "title": null,
+            "labelExpr": "datum.value % 4 == 0 ? ['Generation Z', 'Millenials', 'Generation X', 'Baby Boomers', 'Interwar'][floor(datum.value / 4)] : ''",
+            "labelColor": "#233b40",
+            "labelFont": "Arial",
+            "labelFontSize": 12,
+            "labelPadding": 10,
+            "labelLimit": 180,
+            "domain": false,
+            "ticks": false,
+            "grid": false
+          }
+        },
+        "x": {
+          "field": "hours",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 3.2],
+            "nice": false
+          },
+          "axis": {
+            "title": "Reading hours per day",
+            "titleColor": "#233b40",
+            "labelColor": "#233b40",
+            "titleFont": "Arial",
+            "values": [0, 0.5, 1, 1.5, 2, 2.5, 3],
+            "grid": true,
+            "gridColor": "#e4e2d8",
+            "gridDash": [3, 4],
+            "domain": false,
+            "tickSize": 0
+          }
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Males", "Females", "Persons"],
+            "range": ["#2878B5", "#E07A24", "#26966F"]
+          },
+          "legend": {
+            "title": "Group",
+            "orient": "right",
+            "direction": "vertical",
+            "labelFont": "Arial",
+            "labelFontSize": 12,
+            "titleFont": "Arial",
+            "titleFontSize": 13,
+            "titleColor": "#233b40",
+            "labelColor": "#233b40",
+            "symbolType": "circle",
+            "symbolSize": 100,
+            "padding": 10,
+            "offset": 15
+          }
+        },
+        "tooltip": [
+          {
+            "field": "generation",
+            "title": "Generation"
+          },
+          {
+            "field": "group",
+            "title": "Group"
+          },
+          {
+            "field": "hours",
+            "title": "Reading hours per day",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelLimit": 180,
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}
