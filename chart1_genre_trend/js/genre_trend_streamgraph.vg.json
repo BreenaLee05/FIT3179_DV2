@@ -6,7 +6,7 @@
     "subtitle": "Select a period in the overview to explore category trends in detail."
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/google_books_dataset.csv",
+    "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/main/data/google_books_dataset.csv",
     "format": {
       "type": "csv"
     }
