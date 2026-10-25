@@ -227,7 +227,7 @@ fetch(spec8)
     });
 
 
-var spec9 = "../chart8_time_spent_by_gender/js/time_spent_by_gender_bar.vg.json";
+var spec9 = "../chart9_average_books_read/js/average_books_read_choropleth.vg.json";
 // vegaEmbed('#treemap', spec3).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);

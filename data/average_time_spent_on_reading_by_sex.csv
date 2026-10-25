@@ -1,4 +1,4 @@
-"generation","Males (Hours)","Confidence Interval (Hours) (low)","Confidence Interval (Hours) (high)","Females (Hours)","Confidence Interval (Hours) (low)","Confidence Interval (Hours) (high)","Persons (Hours)","Confidence Interval (Hours) (low)","Confidence Interval (Hours) (high)"
+generation,Males (Hours),Males_low,Males_high,Females (Hours),Females_low,Females_high,Persons (Hours),Persons_low,Persons_high
 "Generation Z","2.8","2.2","3.3","1.6","1.3","1.8","2.1","1.8","2.4"
 "Millenials","1.2","0.9","1.5","1.4","1.1","1.7","1.3","1.1","1.5"
 "Generation X","1.2","1.0","1.4","1.4","1.1","1.6","1.3","1.1","1.5"
