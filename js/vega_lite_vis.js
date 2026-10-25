@@ -99,7 +99,8 @@ fetch(spec3)
     });
 
 
-var spec4 = "../chart4_origin_destination_flow/js/origin_destination_flow.vg.json";
+// var spec4 = "../chart4_origin_destination_flow/js/origin_destination_flow.vg.json";
+var spec4 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart4_origin_destination_flow/js/origin_destination_flow.vg.json";
 // vegaEmbed('#treemap', spec3).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);
