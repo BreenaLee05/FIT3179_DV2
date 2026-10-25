@@ -8,7 +8,7 @@
         "subtitle": "Each square represents one book. Select a publication year."
     },
     "data": {
-        "url": "../../data/goodreads_best_book.csv",
+        "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/goodreads_best_book.csv",
         "format": {
             "type": "csv"
         }

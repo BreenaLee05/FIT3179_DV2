@@ -128,7 +128,9 @@ fetch(spec4)
     });
 
 
-var spec5 = "../chart5_reviews_rating/js/reviews_rating_waffle.vg.json";
+// var spec5 = "../chart5_reviews_rating/js/reviews_rating_waffle.vg.json";
+var spec5 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart5_reviews_rating/js/reviews_rating_waffle.vg.json";
+
 // vegaEmbed('#treemap', spec3).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);
