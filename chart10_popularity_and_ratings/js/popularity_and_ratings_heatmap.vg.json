@@ -1,0 +1,201 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 925,
+  "height": 400,
+  "title": {
+    "text": "Popularity Doesn't Always Mean Higher Ratings",
+    "subtitle": "Explore how books are distributed across reader ratings and number of ratings",
+    "anchor": "start",
+    "color": "#233b40",
+    "fontSize": 21,
+    "subtitleColor": "#557e77",
+    "subtitleFontSize": 12,
+    "offset": 16
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/main/data/google_books_dataset.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.average_rating)",
+      "as": "rating"
+    },
+    {
+      "calculate": "toNumber(datum.ratings_count)",
+      "as": "ratingCount"
+    },
+    {
+      "filter": "isValid(datum.rating) && isValid(datum.ratingCount) && datum.rating >= 0 && datum.rating <= 5 && datum.ratingCount > 0"
+    },
+    {
+      "calculate": "datum.rating < 2 ? 'Below 2.0' : datum.rating < 2.5 ? '2.0–2.49' : datum.rating < 3 ? '2.5–2.99' : datum.rating < 3.5 ? '3.0–3.49' : datum.rating < 4 ? '3.5–3.99' : datum.rating < 4.5 ? '4.0–4.49' : '4.5–5.0'",
+      "as": "ratingBand"
+    },
+    {
+      "calculate": "datum.ratingCount <= 10 ? '1–10' : datum.ratingCount <= 100 ? '11–100' : datum.ratingCount <= 1000 ? '101–1,000' : datum.ratingCount <= 10000 ? '1,001–10,000' : '10,000+'",
+      "as": "popularityBand"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "bookCount"
+        }
+      ],
+      "groupby": [
+        "ratingBand",
+        "popularityBand"
+      ]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fffefa",
+        "strokeWidth": 2,
+        "cornerRadius": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "popularityBand",
+          "type": "ordinal",
+          "sort": [
+            "1–10",
+            "11–100",
+            "101–1,000",
+            "1,001–10,000",
+            "10,000+"
+          ],
+          "axis": {
+            "title": "Number of ratings per book",
+            "labelAngle": 0,
+            "labelColor": "#233b40",
+            "titleColor": "#233b40",
+            "domain": false,
+            "ticks": false,
+            "labelPadding": 8
+          }
+        },
+        "y": {
+          "field": "ratingBand",
+          "type": "ordinal",
+          "sort": [
+            "4.5–5.0",
+            "4.0–4.49",
+            "3.5–3.99",
+            "3.0–3.49",
+            "2.5–2.99",
+            "2.0–2.49",
+            "Below 2.0"
+          ],
+          "axis": {
+            "title": "Average reader rating (stars)",
+            "labelColor": "#233b40",
+            "titleColor": "#233b40",
+            "domain": false,
+            "ticks": false,
+            "labelPadding": 8
+          }
+        },
+        "color": {
+          "field": "bookCount",
+          "type": "quantitative",
+          "scale": {
+            "type": "log",
+            "scheme": "orangered"
+          },
+          "legend": {
+            "title": "Number of books",
+            "orient": "none",
+            "direction": "horizontal",
+            "titleAnchor": "middle",
+            "titleAlign": "center",
+            "titleColor": "#233b40",
+            "labelColor": "#233b40",
+            "legendX": 278,
+            "legendY": 500,
+            "gradientLength": 300
+          }
+        },
+        "tooltip": [
+          {
+            "field": "ratingBand",
+            "title": "Average rating"
+          },
+          {
+            "field": "popularityBand",
+            "title": "Number of ratings"
+          },
+          {
+            "field": "bookCount",
+            "title": "Books",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#fffefa"
+      },
+      "encoding": {
+        "x": {
+          "field": "popularityBand",
+          "type": "ordinal",
+          "sort": [
+            "1–10",
+            "11–100",
+            "101–1,000",
+            "1,001–10,000",
+            "10,000+"
+          ]
+        },
+        "y": {
+          "field": "ratingBand",
+          "type": "ordinal",
+          "sort": [
+            "4.5–5.0",
+            "4.0–4.49",
+            "3.5–3.99",
+            "3.0–3.49",
+            "2.5–2.99",
+            "2.0–2.49",
+            "Below 2.0"
+          ]
+        },
+        "text": {
+          "field": "bookCount",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    }
+  ],
+  "config": {
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Arial",
+      "titleFont": "Arial",
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial"
+    },
+    "legend": {
+      "labelFont": "Arial",
+      "titleFont": "Arial"
+    }
+  }
+}
