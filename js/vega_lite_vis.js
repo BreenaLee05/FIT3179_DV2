@@ -199,7 +199,7 @@ fetch(spec7)
     });
 
 
-var spec8 = "../chart8_time_spent_by_gender/js/time_spent_by_gender_bump.vg.json";
+var spec8 = "../chart8_time_spent_by_gender/js/time_spent_by_gender_bar.vg.json";
 // vegaEmbed('#treemap', spec3).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);
@@ -217,7 +217,7 @@ fetch(spec8)
     .then(function(spec) {
         console.log("JSON loaded successfully:", spec);
 
-        return vegaEmbed("#bumpchart", spec);
+        return vegaEmbed("#barchart", spec);
     })
     .then(function(result) {
         console.log("Chart rendered successfully");
@@ -227,29 +227,29 @@ fetch(spec8)
     });
 
 
-// fetch(spec8 + "?v=" + Date.now())
-//     .then(function(response) {
-//         console.log("Actual JSON URL:", response.url);
-//         console.log("HTTP status:", response.status);
+var spec9 = "../chart8_time_spent_by_gender/js/time_spent_by_gender_bar.vg.json";
+// vegaEmbed('#treemap', spec3).then(function(result) {
+//     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+// }).catch(console.error);
 
-//         if (!response.ok) {
-//             throw new Error("Could not load JSON: " + response.status);
-//         }
+fetch(spec9)
+    .then(function(response) {
+        console.log("JSON response status:", response.status);
 
-//         return response.json();
-//     })
-//     .then(function(spec) {
-//         console.log("Loaded chart title:", spec.title);
-//         console.log("Loaded chart encoding:", spec.encoding);
-//         console.log("Loaded chart specification:", spec);
+        if (!response.ok) {
+            throw new Error("Could not load JSON: " + response.status);
+        }
 
-//         return vegaEmbed("#bumpchart", spec, {
-//             actions: false
-//         });
-//     })
-//     .then(function(result) {
-//         console.log("Chart rendered successfully");
-//     })
-//     .catch(function(error) {
-//         console.error("Chart loading failed:", error);
-//     });
+        return response.json();
+    })
+    .then(function(spec) {
+        console.log("JSON loaded successfully:", spec);
+
+        return vegaEmbed("#choroplethmap", spec);
+    })
+    .then(function(result) {
+        console.log("Chart rendered successfully");
+    })
+    .catch(function(error) {
+        console.error("Chart loading failed:", error);
+    });
