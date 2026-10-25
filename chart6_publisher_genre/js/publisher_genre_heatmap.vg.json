@@ -3,7 +3,6 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": {"step": 32},
-  "background": "#fffefa",
   "title": {
     "text": "The Publishing Landscape: Which Publishers Dominate Each Genre?",
     "subtitle": "Explore the number of books published by each publisher across genres."
@@ -86,12 +85,16 @@
         "scheme": "tealblues",
         "zero": true
       },
-      "legend": {
-        "orient": "bottom",
-        "titleColor": "#233b40",
-        "format": "d",
-        "tickCount": 6
-      }
+    "legend": {
+      "orient": "none",
+      "direction": "horizontal",
+      "legendX": 220,
+      "legendY": 430,
+      "titleAnchor": "middle",
+      "titleAlign": "center",
+      "offset": 10,
+      "gradientLength": 300
+    }
     },
     "tooltip": [
       {
