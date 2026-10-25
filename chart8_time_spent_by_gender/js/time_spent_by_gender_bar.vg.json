@@ -25,7 +25,7 @@
     "offset": 18
   },
   "data": {
-    "url": "../../data/average_time_spent_on_reading_by_sex.csv",
+    "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/average_time_spent_on_reading_by_sex.csv",
     "format": {
       "type": "csv"
     }
