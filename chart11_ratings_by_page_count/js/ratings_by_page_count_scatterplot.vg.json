@@ -1,0 +1,147 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "A Long Read or a Lasting Impression?",
+    "subtitle": "Do books with more pages receive higher average ratings?",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "color": "#245b52"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/goodreads_best_book.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "width": 955,
+  "height": 390,
+  "padding": {
+    "left": 10,
+    "right": 20,
+    "top": 12,
+    "bottom": 10
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.pages)",
+      "as": "pages_numeric"
+    },
+    {
+      "calculate": "toNumber(datum.avg_rating)",
+      "as": "rating_numeric"
+    },
+    {
+      "calculate": "toNumber(datum.num_ratings)",
+      "as": "ratings_numeric"
+    },
+    {
+      "filter": "isValid(datum.pages_numeric) && datum.pages_numeric > 0 && isValid(datum.rating_numeric) && datum.rating_numeric >= 0 && datum.rating_numeric <= 5 && isValid(datum.ratings_numeric) && datum.ratings_numeric >= 10"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "color": "#4b9b89",
+        "opacity": 1.0,
+        "size": 45,
+        "stroke": "#fffefa",
+        "strokeWidth": 0.2
+      },
+      "encoding": {
+        "x": {
+          "field": "pages_numeric",
+          "type": "quantitative",
+          "title": "Number of pages",
+          "scale": {
+            "zero": false
+          },
+          "axis": {
+            "grid": true,
+            "tickCount": 7
+          }
+        },
+        "y": {
+          "field": "rating_numeric",
+          "type": "quantitative",
+          "title": "Average reader rating (out of 5)",
+          "scale": {
+            "domain": [0, 5]
+          },
+          "axis": {
+            "grid": true,
+            "tickCount": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "title",
+            "type": "nominal",
+            "title": "Book"
+          },
+          {
+            "field": "author",
+            "type": "nominal",
+            "title": "Author"
+          },
+          {
+            "field": "pages_numeric",
+            "type": "quantitative",
+            "title": "Pages"
+          },
+          {
+            "field": "rating_numeric",
+            "type": "quantitative",
+            "title": "Rating",
+            "format": ".2f"
+          },
+          {
+            "field": "ratings_numeric",
+            "type": "quantitative",
+            "title": "Number of ratings",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "regression": "rating_numeric",
+          "on": "pages_numeric"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "color": "#245b52",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "x": {
+          "field": "pages_numeric",
+          "type": "quantitative",
+          "title": "Number of pages"
+        },
+        "y": {
+          "field": "rating_numeric",
+          "type": "quantitative",
+          "title": "Average reader rating (out of 5)"
+        }
+      }
+    }
+  ],
+  "config": {
+    "axis": {
+      "labelColor": "#455d58",
+      "titleColor": "#245b52",
+      "domainColor": "#b8c9c2",
+      "tickColor": "#b8c9c2",
+      "gridColor": "#e8eeeb"
+    },
+    "view": {
+      "stroke": null
+    }
+  }
+}

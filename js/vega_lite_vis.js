@@ -305,3 +305,32 @@ fetch(spec10)
     .catch(function(error) {
         console.error("Chart loading failed:", error);
     });
+
+
+var spec11 = "../chart11_ratings_by_page_count/js/ratings_by_page_count_scatterplot.vg.json";
+// var spec10 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart9_average_books_read/js/average_books_read_choropleth.vg.json";
+// vegaEmbed('#treemap', spec3).then(function(result) {
+//     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+// }).catch(console.error);
+
+fetch(spec11)
+    .then(function(response) {
+        console.log("JSON response status:", response.status);
+
+        if (!response.ok) {
+            throw new Error("Could not load JSON: " + response.status);
+        }
+
+        return response.json();
+    })
+    .then(function(spec) {
+        console.log("JSON loaded successfully:", spec);
+
+        return vegaEmbed("#scatterplot", spec);
+    })
+    .then(function(result) {
+        console.log("Chart rendered successfully");
+    })
+    .catch(function(error) {
+        console.error("Chart loading failed:", error);
+    });
