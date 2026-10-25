@@ -159,7 +159,9 @@ fetch(spec5)
 
 
 
-var spec6 = "../chart6_publisher_genre/js/publisher_genre_heatmap.vg.json";
+// var spec6 = "../chart6_publisher_genre/js/publisher_genre_heatmap.vg.json";
+var spec6 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart6_publisher_genre/js/publisher_genre_heatmap.vg.json"
+
 // vegaEmbed('#treemap', spec3).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);

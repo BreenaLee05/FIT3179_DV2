@@ -9,7 +9,7 @@
     "subtitle": "Explore the number of books published by each publisher across genres."
   },
   "data": {
-    "url": "../../data/goodreads_best_book.csv",
+    "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/goodreads_best_book.csv",
     "format": {"type": "csv"}
   },
   "transform": [
