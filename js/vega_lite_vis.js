@@ -168,3 +168,32 @@ fetch(spec6)
     .catch(function(error) {
         console.error("Chart loading failed:", error);
     });
+
+
+
+var spec7 = "../chart7_reading_by_gender/js/reading_by_gender_pointrange.vg.json";
+// vegaEmbed('#treemap', spec3).then(function(result) {
+//     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+// }).catch(console.error);
+
+fetch(spec7)
+    .then(function(response) {
+        console.log("JSON response status:", response.status);
+
+        if (!response.ok) {
+            throw new Error("Could not load JSON: " + response.status);
+        }
+
+        return response.json();
+    })
+    .then(function(spec) {
+        console.log("JSON loaded successfully:", spec);
+
+        return vegaEmbed("#pointrange", spec);
+    })
+    .then(function(result) {
+        console.log("Chart rendered successfully");
+    })
+    .catch(function(error) {
+        console.error("Chart loading failed:", error);
+    });

@@ -1,0 +1,431 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 850,
+    "height": 500,
+    "title": {
+        "text": "Percentage by Generation and Gender",
+        "subtitle": "Dots show participation estimates; whiskers show confidence intervals",
+        "anchor": "start",
+        "color": "#233b40",
+        "fontSize": 21,
+        "subtitleFontSize": 12,
+        "offset": 16
+    },
+    "data": {
+        "url": "../../data/participation_in_reading_by_sex.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "params": [
+        {
+            "name": "groupFilter",
+            "value": "All groups",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "All groups",
+                    "Males",
+                    "Females",
+                    "Persons"
+                ],
+                "name": "Show group: "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "filter": "isValid(toNumber(datum['Males (%)'])) && isValid(datum.generation)"
+        },
+        {
+            "fold": [
+                "Males (%)",
+                "Females (%)",
+                "Persons (%)"
+            ],
+            "as": [
+                "original_group",
+                "percentage"
+            ]
+        },
+        {
+            "calculate": "datum.original_group == 'Males (%)' ? 'Males' : datum.original_group == 'Females (%)' ? 'Females' : 'Persons'",
+            "as": "group"
+        },
+        {
+            "calculate": "toNumber(datum.percentage)",
+            "as": "percentage"
+        },
+        {
+            "calculate": "datum.group == 'Males' ? toNumber(datum.Males_low) : datum.group == 'Females' ? toNumber(datum.Females_low) : toNumber(datum.Persons_low)",
+            "as": "low"
+        },
+        {
+            "calculate": "datum.group == 'Males' ? toNumber(datum.Males_high) : datum.group == 'Females' ? toNumber(datum.Females_high) : toNumber(datum.Persons_high)",
+            "as": "high"
+        },
+        {
+            "filter": "groupFilter == 'All groups' || datum.group == groupFilter"
+        }
+    ],
+    "layer": [
+        {
+            "mark": {
+                "type": "rule",
+                "strokeWidth": 5,
+                "opacity": 0.85
+            },
+            "encoding": {
+                "x": {
+                    "field": "low",
+                    "type": "quantitative",
+                    "scale": {
+                        "domain": [
+                            0,
+                            60
+                        ]
+                    },
+                    "axis": {
+                        "title": "Participation (%)",
+                        "values": [
+                            0,
+                            10,
+                            20,
+                            30,
+                            40,
+                            50,
+                            60
+                        ],
+                        "grid": true,
+                        "gridColor": "#e4e2d8",
+                        "gridDash": [
+                            3,
+                            4
+                        ],
+                        "domain": false,
+                        "tickSize": 0,
+                        "labelColor": "#233b40",
+                        "titleColor": "#233b40"
+                    }
+                },
+                "x2": {
+                    "field": "high"
+                },
+                "y": {
+                    "field": "generation",
+                    "type": "ordinal",
+                    "sort": [
+                        "Generation Z",
+                        "Millenials",
+                        "Generation X",
+                        "Baby Boomers",
+                        "Interwar"
+                    ],
+                    "axis": {
+                        "title": null,
+                        "labelColor": "#233b40",
+                        "labelFontSize": 12,
+                        "domain": false,
+                        "ticks": false
+                    }
+                },
+                "yOffset": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            -12,
+                            0,
+                            12
+                        ]
+                    }
+                },
+                "color": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            "#2878B5",
+                            "#E07A24",
+                            "#26966F"
+                        ]
+                    },
+                    "legend": {
+                        "title": "Group",
+                        "orient": "right",
+                        "direction": "vertical",
+                        "labelFontSize": 12,
+                        "titleFontSize": 13,
+                        "symbolType": "circle",
+                        "symbolSize": 100
+                    }
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "tick",
+                "orient": "vertical",
+                "thickness": 5,
+                "size": 15
+            },
+            "encoding": {
+                "x": {
+                    "field": "low",
+                    "type": "quantitative",
+                    "scale": {
+                        "domain": [
+                            0,
+                            60
+                        ]
+                    }
+                },
+                "y": {
+                    "field": "generation",
+                    "type": "ordinal",
+                    "sort": [
+                        "Generation Z",
+                        "Millenials",
+                        "Generation X",
+                        "Baby Boomers",
+                        "Interwar"
+                    ]
+                },
+                "yOffset": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            -12,
+                            0,
+                            12
+                        ]
+                    }
+                },
+                "color": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            "#2878B5",
+                            "#E07A24",
+                            "#26966F"
+                        ]
+                    },
+                    "legend": {
+                        "title": "Group",
+                        "orient": "right",
+                        "direction": "vertical",
+                        "labelFontSize": 12,
+                        "titleFontSize": 13,
+                        "symbolType": "circle",
+                        "symbolSize": 100
+                    }
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "tick",
+                "orient": "vertical",
+                "thickness": 5,
+                "size": 15
+            },
+            "encoding": {
+                "x": {
+                    "field": "high",
+                    "type": "quantitative",
+                    "scale": {
+                        "domain": [
+                            0,
+                            60
+                        ]
+                    }
+                },
+                "y": {
+                    "field": "generation",
+                    "type": "ordinal",
+                    "sort": [
+                        "Generation Z",
+                        "Millenials",
+                        "Generation X",
+                        "Baby Boomers",
+                        "Interwar"
+                    ]
+                },
+                "yOffset": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            -12,
+                            0,
+                            12
+                        ]
+                    }
+                },
+                "color": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            "#2878B5",
+                            "#E07A24",
+                            "#26966F"
+                        ]
+                    },
+                    "legend": {
+                        "title": "Group",
+                        "orient": "right",
+                        "direction": "vertical",
+                        "labelFontSize": 12,
+                        "titleFontSize": 13,
+                        "symbolType": "circle",
+                        "symbolSize": 100
+                    }
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 250,
+                "stroke": "#fffefa",
+                "strokeWidth": 1.5
+            },
+            "encoding": {
+                "x": {
+                    "field": "percentage",
+                    "type": "quantitative",
+                    "scale": {
+                        "domain": [
+                            0,
+                            60
+                        ]
+                    }
+                },
+                "y": {
+                    "field": "generation",
+                    "type": "ordinal",
+                    "sort": [
+                        "Generation Z",
+                        "Millenials",
+                        "Generation X",
+                        "Baby Boomers",
+                        "Interwar"
+                    ]
+                },
+                "yOffset": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            -12,
+                            0,
+                            12
+                        ]
+                    }
+                },
+                "color": {
+                    "field": "group",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "Males",
+                            "Females",
+                            "Persons"
+                        ],
+                        "range": [
+                            "#2878B5",
+                            "#E07A24",
+                            "#26966F"
+                        ]
+                    },
+                    "legend": {
+                        "title": "Group",
+                        "orient": "right",
+                        "direction": "vertical",
+                        "labelFontSize": 12,
+                        "titleFontSize": 13,
+                        "symbolType": "circle",
+                        "symbolSize": 100
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "generation",
+                        "title": "Generation"
+                    },
+                    {
+                        "field": "group",
+                        "title": "Group"
+                    },
+                    {
+                        "field": "percentage",
+                        "title": "Participation",
+                        "format": ".1f"
+                    },
+                    {
+                        "field": "low",
+                        "title": "CI lower bound",
+                        "format": ".1f"
+                    },
+                    {
+                        "field": "high",
+                        "title": "CI upper bound",
+                        "format": ".1f"
+                    }
+                ]
+            }
+        }
+    ],
+    "config": {
+        "font": "Arial",
+        "view": {
+            "stroke": null
+        },
+        "axis": {
+            "labelFont": "Arial",
+            "titleFont": "Arial"
+        },
+        "legend": {
+            "labelFontSize": 11     
+        }   
+    }
+}
