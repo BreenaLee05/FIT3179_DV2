@@ -1,7 +1,7 @@
 
 // Start from html page 
 // var spec1 = "/FIT3179_DV2/chart1_genre_trend/js/genre_trend_streamgraph.vg.json";
-var spec1 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart1_genre_trend/js/genre_trend_streamgraph.vg.json"
+var spec1 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart1_genre_trend/js/genre_trend_streamgraph.vg.json";
 // vegaEmbed('#streamgraph', spec1).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);
@@ -42,7 +42,7 @@ fetch(spec1)
 
 // var spec2 = "../chart2_author_nationality/js/author_nationality_graduateddot.vg.json";
 // var spec2 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart2_author_nationality/js/author_nationality_choropleth.vg.json";
-var spec2 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart2_author_nationality/js/author_nationality_graduateddot.vg.json"
+var spec2 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart2_author_nationality/js/author_nationality_graduateddot.vg.json";
 // vegaEmbed('#graduateddotmap', spec2).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);
@@ -69,8 +69,9 @@ fetch(spec2)
         console.error("Chart loading failed:", error);
     });
 
-var spec3 = "../chart3_genre_distribution/js/genre_distribution_treemap.vg.json";
+// var spec3 = "../chart3_genre_distribution/js/genre_distribution_treemap.vg.json";
 // var spec3 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart3_genre_distribution/js/genre_distribution_treemap.vg.json";
+var spec3 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart3_genre_distribution/js/genre_distribution_treemap.vg.json";
 // vegaEmbed('#treemap', spec3).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);
