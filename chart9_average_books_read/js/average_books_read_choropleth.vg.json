@@ -24,7 +24,7 @@
       "lookup": "country_lookup",
       "from": {
         "data": {
-          "url": "../../data/average-books-read-per-year-by-country-2026.csv",
+          "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/average-books-read-per-year-by-country-2026.csv",
           "format": {"type": "csv"}
         },
         "key": "country",
