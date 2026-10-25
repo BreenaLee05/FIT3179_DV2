@@ -190,7 +190,8 @@ fetch(spec6)
 
 
 
-var spec7 = "../chart7_reading_by_gender/js/reading_by_gender_pointrange.vg.json";
+// var spec7 = "../chart7_reading_by_gender/js/reading_by_gender_pointrange.vg.json";
+var spec7 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart7_reading_by_gender/js/reading_by_gender_pointrange.vg.json";
 // vegaEmbed('#treemap', spec3).then(function(result) {
 //     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 // }).catch(console.error);

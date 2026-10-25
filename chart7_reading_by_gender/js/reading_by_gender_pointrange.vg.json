@@ -30,7 +30,7 @@
                 "offset": 16
             },
             "data": {
-                "url": "../../data/participation_in_reading_by_sex.csv",
+                "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/participation_in_reading_by_sex.csv",
                 "format": {
                     "type": "csv"
                 }
@@ -431,7 +431,7 @@
                 "offset": 12
             },
             "data": {
-                "url": "../../data/participation_in_reading_by_sex.csv",
+                "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/participation_in_reading_by_sex.csv",
                 "format": {
                     "type": "csv"
                 }
