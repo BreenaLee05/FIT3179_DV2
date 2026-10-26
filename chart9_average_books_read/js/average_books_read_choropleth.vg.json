@@ -1,7 +1,7 @@
 
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": "#F8F5EF",
+  "background": "#FFFEFA",
   "title": {
     "text": "A World of Reading",
     "subtitle": "Average books read per year, 2024"
@@ -96,7 +96,6 @@
     "view": {"stroke": null},
     "title": {
       "font": "Arial",
-      "color": "#233b40",
       "fontSize": 20,
       "anchor": "start"
     }

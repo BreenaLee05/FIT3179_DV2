@@ -1,15 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": "#F8F5EF",
+  "background": "#FFFEFA",
   "width": 925,
   "height": 400,
   "title": {
     "text": "Popularity Doesn't Always Mean Higher Ratings",
     "subtitle": "Explore how books are distributed across reader ratings and number of ratings",
     "anchor": "start",
-    "color": "#233b40",
-    "fontSize": 21,
-    "subtitleColor": "#557e77",
+    "fontSize": 20,
     "subtitleFontSize": 12,
     "offset": 16
   },

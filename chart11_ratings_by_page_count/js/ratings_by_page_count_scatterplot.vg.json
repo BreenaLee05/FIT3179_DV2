@@ -1,14 +1,13 @@
 
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": "#F8F5EF",
+  "background": "#FFFEFA",
   "title": {
     "text": "A Long Read or a Lasting Impression?",
     "subtitle": "Do books with more pages receive higher average ratings?",
     "anchor": "start",
-    "fontSize": 18,
-    "subtitleFontSize": 12,
-    "color": "#245b52"
+    "fontSize": 20,
+    "subtitleFontSize": 12
   },
   "data": {
     "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/goodreads_best_book.csv",
@@ -135,8 +134,6 @@
   ],
   "config": {
     "axis": {
-      "labelColor": "#455d58",
-      "titleColor": "#245b52",
       "domainColor": "#b8c9c2",
       "tickColor": "#b8c9c2",
       "gridColor": "#e8eeeb"

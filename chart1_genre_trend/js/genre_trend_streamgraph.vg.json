@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": "#F8F5EF",
+  "background": "#FFFEFA",
   "title": {
     "text": "How Does Book Category Change Over Time?",
     "subtitle": "Select a period in the overview to explore category trends in detail."
@@ -197,7 +197,7 @@
       "titleFontSize": 12
     },
     "title": {
-      "fontSize": 18,
+      "fontSize": 20,
       "anchor": "start"
     }
   }

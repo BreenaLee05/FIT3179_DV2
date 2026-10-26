@@ -1,7 +1,7 @@
 
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": "#F8F5EF",
+  "background": "#FFFEFA",
   "width": "container",
   "height": {"step": 32},
   "title": {
@@ -125,8 +125,7 @@
     "font": "Arial",
     "axis": {"grid": false, "domain": false, "tickSize": 0},
     "title": {
-      "color": "#233b40",
-      "fontSize": 19,
+      "fontSize": 20,
       "anchor": "start"
     }
   }

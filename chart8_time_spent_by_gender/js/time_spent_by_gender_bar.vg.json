@@ -1,7 +1,7 @@
 
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": "#F8F5EF",
+  "background": "#FFFEFA",
   "width": 835,
   "height": 500,
   "autosize": {
@@ -18,10 +18,8 @@
     "text": "Who Spends the Most Time Reading?",
     "subtitle": "Average reading hours per day by generation and group",
     "anchor": "start",
-    "color": "#233b40",
     "font": "Arial",
-    "fontSize": 21,
-    "subtitleColor": "#557e77",
+    "fontSize": 20,
     "subtitleFontSize": 12,
     "offset": 18
   },
