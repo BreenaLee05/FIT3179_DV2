@@ -37,14 +37,24 @@
         {"field": "publisher", "order": "ascending"}
       ]
     },
+    {"filter": "datum.publisherRank <= 10"},
     {
-      "filter": "datum.publisherRank <= 10"
+      "impute": "bookCount",
+      "key": "genre",
+      "groupby": ["publisher"],
+      "value": 0
+    },
+    {
+      "joinaggregate": [
+        {"op": "sum", "field": "bookCount", "as": "publisherTotalFinal"}
+      ],
+      "groupby": ["publisher"]
     }
   ],
   "mark": {
     "type": "rect",
     "cornerRadius": 3,
-    "stroke": "#fffefa",
+    "stroke": "#FFFEFA",
     "strokeWidth": 2
   },
   "encoding": {
@@ -66,7 +76,7 @@
       "type": "nominal",
       "title": "Publisher",
       "sort": {
-        "field": "publisherTotal",
+        "field": "publisherTotalFinal",
         "op": "max",
         "order": "descending"
       },
@@ -78,24 +88,30 @@
       }
     },
     "color": {
+      "condition": {
+        "test": "datum.bookCount == 0",
+        "value": "#E5E5E5"
+      },
       "field": "bookCount",
       "type": "quantitative",
       "title": "Number of books",
       "scale": {
         "type": "sqrt",
         "scheme": "tealblues",
-        "zero": true
+        "domainMin": 1,
+        "zero": false
       },
-    "legend": {
-      "orient": "none",
-      "direction": "horizontal",
-      "legendX": 220,
-      "legendY": 430,
-      "titleAnchor": "middle",
-      "titleAlign": "center",
-      "offset": 10,
-      "gradientLength": 300
-    }
+      "legend": {
+        "orient": "none",
+        "direction": "horizontal",
+        "legendX": 220,
+        "legendY": 430,
+        "titleAnchor": "middle",
+        "titleAlign": "center",
+        "offset": 10,
+        "gradientLength": 300,
+        "values": [1, 10, 20, 30, 40, 50]
+      }
     },
     "tooltip": [
       {
@@ -114,7 +130,7 @@
         "title": "Number of books"
       },
       {
-        "field": "publisherTotal",
+        "field": "publisherTotalFinal",
         "type": "quantitative",
         "title": "Total books by publisher"
       }
@@ -123,7 +139,11 @@
   "config": {
     "view": {"stroke": null},
     "font": "Arial",
-    "axis": {"grid": false, "domain": false, "tickSize": 0},
+    "axis": {
+      "grid": false,
+      "domain": false,
+      "tickSize": 0
+    },
     "title": {
       "fontSize": 20,
       "anchor": "start"
