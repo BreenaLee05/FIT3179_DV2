@@ -647,3 +647,14 @@ li {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* 14. Metadata
+   ========================================================= */
+.chart-metadata {
+    font-size: 12px;
+    color: #52645D;
+    background-color: #F1EDE4;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 12px;
+}
