@@ -68,7 +68,7 @@
   ],
   "vconcat": [
     {
-      "width": 850,
+      "width": 995,
       "height": 400,
       "transform": [
         {
@@ -102,7 +102,27 @@
         "color": {
           "field": "categories",
           "type": "nominal",
-          "title": "Category"
+          "title": "Category",
+          "legend": {
+            "orient": "none",
+            "direction": "vertical",
+            "titleFont": "Arial",
+            "titleFontSize": 13,
+            "titleColor": "#233b40",
+            "labelFont": "Arial",
+            "labelFontSize": 11,
+            "labelColor": "#233b40",
+            "symbolType": "square",
+            "symbolSize": 100,
+            "titleAnchor": "middle",
+            "legendX": 340,
+            "legendY": 620,
+            "padding": 10,
+            "offset": 15,
+            "columns": 2,
+            "columnPadding": 55,
+            "rowPadding": 8
+          }
         },
         "tooltip": [
           {
@@ -125,7 +145,7 @@
       }
     },
     {
-      "width": 850,
+      "width": 995,
       "height": 100,
       "params": [
         {
