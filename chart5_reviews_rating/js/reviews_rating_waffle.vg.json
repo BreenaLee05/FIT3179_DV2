@@ -2,10 +2,9 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 1000,
     "height": 500,
-    "background": "#fffefa",
     "title": {
         "text": "How Are Books Rated?",
-        "subtitle": "Each square represents one book. Select a publication year."
+        "subtitle": "Explore how book ratings vary from 2020 to 2025"
     },
     "data": {
         "url": "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/data/goodreads_best_book.csv",
@@ -119,8 +118,15 @@
             },
             "legend": {
                 "title": "Average rating",
-                "orient": "bottom"
-            }
+                "orient": "none",
+                "direction": "horizontal",
+                "titleAnchor": "middle",
+                "titleAlign": "center",
+                "titleColor": "#233b40",
+                "labelColor": "#233b40",
+                "legendX": 350,
+                "legendY": 520
+                }
         },
         "tooltip": [
             {
@@ -160,8 +166,7 @@
         "title": {
             "anchor": "start",
             "fontSize": 20,
-            "subtitleFontSize": 12,
-            "subtitleColor": "#666666"
+            "subtitleFontSize": 12
         }
     }
 }
