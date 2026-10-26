@@ -2,18 +2,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "#FFFEFA",
-  "width": 835,
+  "width": 825,
   "height": 500,
-  "autosize": {
-    "type": "pad",
-    "contains": "padding"
-  },
-  "padding": {
-    "left": 5,
-    "right": 20,
-    "top": 5,
-    "bottom": 5
-  },
   "title": {
     "text": "Who Spends the Most Time Reading?",
     "subtitle": "Average reading hours per day by generation and group",
@@ -119,18 +109,22 @@
           },
           "legend": {
             "title": "Group",
-            "orient": "right",
-            "direction": "vertical",
+            "orient": "none",
+            "direction": "horizontal",
+            "titleAnchor": "middle",
+            "titleAlign": "center",
             "labelFont": "Arial",
+            "legendX": 250,
+            "legendY": 540,
             "labelFontSize": 12,
             "titleFont": "Arial",
             "titleFontSize": 13,
-            "titleColor": "#233b40",
-            "labelColor": "#233b40",
             "symbolType": "circle",
             "symbolSize": 100,
             "padding": 10,
-            "offset": 15
+            "offset": 15,
+            "columnPadding": 65,
+            "rowPadding": 10
           }
         },
         "tooltip": [

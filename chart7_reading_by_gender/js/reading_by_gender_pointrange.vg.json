@@ -164,12 +164,22 @@
                             },
                             "legend": {
                                 "title": "Group",
-                                "orient": "right",
-                                "direction": "vertical",
+                                "orient": "none",
+                                "direction": "horizontal",
+                                "titleAnchor": "middle",
+                                "titleAlign": "center",
+                                "labelFont": "Arial",
+                                "legendX": 260,
+                                "legendY": 540,
                                 "labelFontSize": 12,
+                                "titleFont": "Arial",
                                 "titleFontSize": 13,
                                 "symbolType": "circle",
-                                "symbolSize": 100
+                                "symbolSize": 100,
+                                "padding": 10,
+                                "offset": 15,
+                                "columnPadding": 65,
+                                "rowPadding": 10
                             }
                         }
                     }
@@ -236,12 +246,22 @@
                             },
                             "legend": {
                                 "title": "Group",
-                                "orient": "right",
-                                "direction": "vertical",
+                                "orient": "none",
+                                "direction": "horizontal",
+                                "titleAnchor": "middle",
+                                "titleAlign": "center",
+                                "labelFont": "Arial",
+                                "legendX": 260,
+                                "legendY": 540,
                                 "labelFontSize": 12,
+                                "titleFont": "Arial",
                                 "titleFontSize": 13,
                                 "symbolType": "circle",
-                                "symbolSize": 100
+                                "symbolSize": 100,
+                                "padding": 10,
+                                "offset": 15,
+                                "columnPadding": 65,
+                                "rowPadding": 10
                             }
                         }
                     }
@@ -308,12 +328,22 @@
                             },
                             "legend": {
                                 "title": "Group",
-                                "orient": "right",
-                                "direction": "vertical",
+                                "orient": "none",
+                                "direction": "horizontal",
+                                "titleAnchor": "middle",
+                                "titleAlign": "center",
+                                "labelFont": "Arial",
+                                "legendX": 260,
+                                "legendY": 540,
                                 "labelFontSize": 12,
+                                "titleFont": "Arial",
                                 "titleFontSize": 13,
                                 "symbolType": "circle",
-                                "symbolSize": 100
+                                "symbolSize": 100,
+                                "padding": 10,
+                                "offset": 15,
+                                "columnPadding": 65,
+                                "rowPadding": 10
                             }
                         }
                     }
@@ -381,12 +411,22 @@
                             },
                             "legend": {
                                 "title": "Group",
-                                "orient": "right",
-                                "direction": "vertical",
+                                "orient": "none",
+                                "direction": "horizontal",
+                                "titleAnchor": "middle",
+                                "titleAlign": "center",
+                                "labelFont": "Arial",
+                                "legendX": 260,
+                                "legendY": 540,
                                 "labelFontSize": 12,
+                                "titleFont": "Arial",
                                 "titleFontSize": 13,
                                 "symbolType": "circle",
-                                "symbolSize": 100
+                                "symbolSize": 100,
+                                "padding": 10,
+                                "offset": 15,
+                                "columnPadding": 65,
+                                "rowPadding": 10
                             }
                         },
                         "tooltip": [
@@ -559,6 +599,7 @@
             ]
         }
     ],
+    "spacing": 120,
     "config": {
         "font": "Arial",
         "view": {
