@@ -84,6 +84,9 @@
             "range": [10, 1200]
           },
           "legend": {
+            "orient": "none",
+            "legendX": 350,
+            "legendY": 450,
             "format": "d",
             "values": [1, 100, 500, 1000, 1886]
           }

@@ -130,7 +130,12 @@
             "domain": [1, 113],
             "range": [0.5, 4]
           },
-          "legend": {"title": "Number of books"}
+          "legend": {
+            "title": "Number of books",
+            "orient": "none",
+            "legendX": 350,
+            "legendY": 500
+          }
         },
         "tooltip": [
           {
@@ -181,7 +186,11 @@
           "field": "books",
           "type": "quantitative",
           "scale": {"type": "sqrt", "domain": [1, 113], "range": [0.5, 4]},
-          "legend": {"title": "Number of books"}
+          "legend": {
+            "title": "Number of books",
+            "orient": "none",
+            "legendX": 500,
+            "legendY": 500}
         },
         "tooltip": [
           {"field": "origin", "title": "Origin: Author nationality"},
@@ -237,7 +246,10 @@
             "range": ["#0F766E", "#F59E0B"]
           },
           "legend": {
-            "title": "Point represents"
+            "title": "Point represents",
+            "orient": "none",
+            "legendX": 500,
+            "legendY": 500
           }
         }
       }
@@ -289,7 +301,10 @@
             "range": ["#0F766E", "#F59E0B"]
           },
           "legend": {
-            "title": "Point represents"
+            "title": "Point represents",
+            "orient": "none",
+            "legendX": 350,
+            "legendY": 500
           }
         }
       }
