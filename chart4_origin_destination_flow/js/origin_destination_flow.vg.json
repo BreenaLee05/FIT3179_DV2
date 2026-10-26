@@ -205,7 +205,7 @@
           "filter": "originRegion == 'All origins' || (originRegion == 'Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) >= 0) || (originRegion == 'Outside Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) < 0)"
         },
         {
-          "calculate": "'Publisher country (destination)'", "as": "pointType"
+          "calculate": "'Author nationality (origin)'", "as": "pointType"
         }
       ],
       "mark": {
@@ -257,7 +257,7 @@
           "filter": "originRegion == 'All origins' || (originRegion == 'Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) >= 0) || (originRegion == 'Outside Europe' && indexof(['Austria','Belgium','Bulgaria','Cyprus','Czech Republic','Denmark','Finland','France','Germany','Greece','Hungary','Ireland','Italy','Netherlands','Norway','Poland','Portugal','Spain','Sweden','Switzerland','United Kingdom'], datum.origin) < 0)"
         },
         {
-          "calculate": "'Author nationality (origin)'", "as": "pointType"
+          "calculate": "'Publisher country (destination)'", "as": "pointType"
         }
       ],
       "mark": {
@@ -300,8 +300,7 @@
     "title": {
       "anchor": "start",
       "fontSize": 20,
-      "subtitleFontSize": 12,
-      "subtitleColor": "#666666"
+      "subtitleFontSize": 12
     }
   }
 }
