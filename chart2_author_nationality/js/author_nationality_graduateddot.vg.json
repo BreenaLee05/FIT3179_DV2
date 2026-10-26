@@ -1,6 +1,7 @@
 
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.4.0.json",
+  "background": "#F8F5EF",
   "title": {
     "text": "Where Do the Bestselling Authors Come From?",
     "subtitle": "Circle size represents bestseller entries by author nationality"

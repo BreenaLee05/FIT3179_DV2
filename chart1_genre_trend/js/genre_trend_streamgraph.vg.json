@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "#F8F5EF",
   "title": {
     "text": "How Does Book Category Change Over Time?",
     "subtitle": "Select a period in the overview to explore category trends in detail."
