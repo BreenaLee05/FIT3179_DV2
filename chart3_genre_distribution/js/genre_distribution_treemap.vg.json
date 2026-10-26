@@ -1,6 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "width": 1000,
+  "title": {
+  "text": "Which Genres Receive the Most Reader Engagement?",
+  "subtitle": "Top 10 genres ranked by total reviews, with rectangle size representing the number of reviews.",
+  "anchor": "start",
+  "fontSize": 20,
+  "subtitleFontSize": 13,
+  "offset": 10
+},
+  "width": 996,
   "height": 500,
   "padding": 5,
   "data": [
