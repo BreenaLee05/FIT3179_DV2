@@ -102,7 +102,7 @@ fetch(spec4)
 
 
 // var spec5 = "../chart5_reviews_rating/js/reviews_rating_waffle.vg.json";
-// var spec5 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart5_reviews_rating/js/reviews_rating_waffle.vg.json";
+var spec5 = "https://raw.githubusercontent.com/BreenaLee05/FIT3179_DV2/refs/heads/main/chart5_reviews_rating/js/reviews_rating_waffle.vg.json";
 
 fetch(spec5)
     .then(function(response) {
