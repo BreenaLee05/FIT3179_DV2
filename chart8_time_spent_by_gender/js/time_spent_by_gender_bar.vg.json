@@ -33,16 +33,16 @@
       "as": "group"
     },
     {
+      "calculate": "toNumber(datum.hours)",
+      "as": "hours"
+    },
+    {
       "calculate": "indexof(['Generation Z', 'Millenials', 'Generation X', 'Baby Boomers', 'Interwar'], datum.generation)",
       "as": "generationIndex"
     },
     {
       "calculate": "datum.generationIndex * 4 + indexof(['Males', 'Females', 'Persons'], datum.group)",
       "as": "rowPosition"
-    },
-    {
-      "calculate": "datum.group == 'Males' ? 'Confidence Interval (Hours) (low)' : datum.group == 'Females' ? 'Confidence Interval (Hours) (low)' : 'Confidence Interval (Hours) (low)'",
-      "as": "unused"
     }
   ],
   "layer": [
@@ -84,7 +84,7 @@
           "field": "hours",
           "type": "quantitative",
           "scale": {
-            "domain": [0, 3.2],
+            "domain": [0, 3.8],
             "nice": false
           },
           "axis": {
@@ -142,6 +142,55 @@
             "format": ".1f"
           }
         ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.generation === 'Generation Z' && datum.group === 'Males'"
+        },
+        {
+          "calculate": "'Highest reading time: ' + format(datum.hours, '.1f') + ' hours/day'",
+          "as": "annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#233b40"
+      },
+      "encoding": {
+        "x": {
+          "field": "hours",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 3.8],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "rowPosition",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              0, 1, 2,
+              4, 5, 6,
+              8, 9, 10,
+              12, 13, 14,
+              16, 17, 18
+            ],
+            "paddingInner": 0.15,
+            "paddingOuter": 0.1
+          },
+          "axis": null
+        },
+        "text": {
+          "field": "annotation"
+        }
       }
     }
   ],
