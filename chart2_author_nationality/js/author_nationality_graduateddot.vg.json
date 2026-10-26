@@ -49,11 +49,11 @@
           "filter": "isValid(datum.CapitalLatitude) && isValid(datum.CapitalLongitude) && isValid(datum.entryCount) && datum.entryCount > 0"
         },
         {
-          "calculate": "toNumber(datum.CapitalLongitude)",
+          "calculate": "datum.nationality === 'United States' ? -77.0369 : toNumber(datum.CapitalLongitude)",
           "as": "longitude"
         },
         {
-          "calculate": "toNumber(datum.CapitalLatitude)",
+          "calculate": "datum.nationality === 'United States' ? 38.9072 : toNumber(datum.CapitalLatitude)",
           "as": "latitude"
         }
       ],
