@@ -22,8 +22,8 @@
             "width": 850,
             "height": 500,
             "title": {
-                "text": "Percentage by Generation and Gender",
-                "subtitle": "Dots show participation estimates; whiskers show confidence intervals",
+                "text": "Who Reads More? Generations and Gender",
+                "subtitle": "Compare reading participation across generations and gender, with estimates and confidence intervals",
                 "anchor": "start",
                 "fontSize": 20,
                 "subtitleFontSize": 12,
