@@ -3,8 +3,8 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "#FFFEFA",
   "title": {
-    "text": "A World of Reading",
-    "subtitle": "Average books read per year, 2024"
+    "text": "How Much Does the World Read?",
+    "subtitle": "Which countries read the most books annually? Explore average books read per person in 2024."
   },
   "width": 850,
   "height": 500,
