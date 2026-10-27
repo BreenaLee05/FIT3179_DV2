@@ -2,7 +2,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "background": "#FFFEFA",
-  "width": "container",
+  "width": 865,
   "height": {"step": 32},
   "title": {
     "text": "The Publishing Landscape: Which Publishers Dominate Each Genre?",
